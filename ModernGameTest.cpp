@@ -3,10 +3,9 @@
 //MAKE-A-CYCLE + AVOID-A-CYCLE VERSION HERE 
 
 //In terminal needs to be compiled with special option at the end "--std=c++17"
-//i.e. g++ gameMACV1.cpp -o gameMACV1.exe --std=c++17
+//i.e. g++ ModernGameTest.cpp -o ModernGameTest.exe --std=c++17
 //Mingw g++ version 9.2.0
 //Doesn't seem to be necessary with Virtual Studio, did manually set the C++ compiler in preferences to c++17 however
-//Replaced all C arrays with std::vector's in this version->memory allocation safety stuff
 
 #include <iostream>
 #include <math.h>
@@ -452,6 +451,8 @@ int optimalPlayMACLoud(int currentnode, int numnodes, std::vector<std::vector<in
 					std::cout << " Move History: ";
 					outputfile << " Move History: ";
 					printmovehistory(recursiondepth, movehistory, outputfile);
+					std::cout << "->" << i; //already taken out of movehistory by the time we're printing
+					outputfile << "->" << i;
 					std::cout << std::endl;
 					outputfile << std::endl;
 					nodeusageMatrix[i] = 0; //reset the node's visited status now that we're returning
@@ -584,7 +585,7 @@ int optimalPlayMACQuiet(int currentnode, int numnodes, std::vector<std::vector<i
 		}
 		{
 			PROFILE_SCOPE("Recursion all moves");
-			for (int i = 0; i < numnodes; i++) //for all possible edges connected to this node in the adjacency matrix, scope issues here?
+			for (int i = 0; i < numnodes; i++) //for all possible edges connected to this node in the adjacency matrix
 			{
 				if ((AdjacencyMatrix[currentnode][i] == 1) && (edgeusageMatrix[currentnode][i] == 0)) //go through all the node's existing, unused edges
 				{
@@ -761,6 +762,7 @@ void nTunnelDihedralGeneration(std::ofstream& outputfile, int n, int m)
 	return;
 }
 
+//move this into the tuple class?
 unsigned tupleDifference(Tuple<unsigned> tuple1, Tuple<unsigned> tuple2)
 {
 	PROFILE_SCOPE("tupleDifference");
@@ -865,7 +867,7 @@ void zmnAdjacencyGeneration(std::ofstream& outputfile, unsigned m, unsigned n)
 			{
 				outputfile << ',';
 			}
-			else if (i < ((unsigned)std::pow(m, n) - 1)) //if we're not at the end of the line
+			else if (i < ((unsigned)std::pow(m, n) - 1)) //if we're not at the end of the last line
 			{
 				outputfile << std::endl;
 			}
@@ -1152,7 +1154,7 @@ int main()
 		int filecounter = 0;
 		int fileselector = 0;
 
-		//way to strip off directory and just have file name printed???
+		//issues with running in non-Windows environments?
 		for (const auto& entry : std::filesystem::directory_iterator(selectionpath)) //wtf?
 		{
 			if (entry.is_regular_file()) //don't want to list out folders as choices
@@ -1330,6 +1332,16 @@ int main()
 				outputfile << std::endl;
 			}
 		}
+		std::cout << "1D Matrix just in case:" << std::endl;
+		for (unsigned i = 0; i < numnodes; i++)
+		{
+			for (unsigned j = 0; j < numnodes; j++)
+			{
+				std::cout << AdjacencyMatrix1D[i + (j * numnodes)]<< " ";
+			}
+			std::cout << std::endl;
+		}
+
 		//} End of output file stuff
 
 		//{Here we go...

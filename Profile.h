@@ -11,7 +11,7 @@
 #include <mutex>
 #include <thread>
 
-//#define PROFILING_ENABLE
+#define PROFILING_ENABLE
 #ifdef PROFILING_ENABLE
 
 struct ProfileResult
