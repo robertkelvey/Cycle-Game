@@ -17,7 +17,7 @@
 #include <fstream>
 #include <filesystem>
 #include <vector>
-#include "ThreadPool.h"
+//#include "ThreadPool.h" //might try to multithread later
 #include "Profile.h"
 
 template<typename T> 
@@ -161,7 +161,8 @@ void readinMatrix2D(std::string filepath, int n, std::vector<std::vector<int>>& 
 			matrix[i][j] = std::stoi(number);
 		}
 		std::getline(data, number, '\n');
-		matrix[i][n - 1] = std::stoi(number);
+		matrix[i][static_cast<__int64>(n) - 1] = std::stoi(number); //Visual Studio said to add that cast to avoid potential overflow
+		//matrix[i][n - 1] = std::stoi(number); //original line from ^
 	}
 
 	data.close();
