@@ -4,7 +4,6 @@
     <ClCompile Include="..\ModernGameTest.cpp" />
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="..\ThreadPool.h" />
     <ClInclude Include="..\Profile.h" />
   </ItemGroup>
   <ItemGroup>
