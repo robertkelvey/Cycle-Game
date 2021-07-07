@@ -6,7 +6,6 @@
 //i.e. g++ gameMACV1.cpp -o gameMACV1.exe --std=c++17
 //Mingw g++ version 9.2.0
 //Doesn't seem to be necessary with Virtual Studio, did manually set the C++ compiler in preferences to c++17 however
-//Replaced all C arrays with std::vector's in this version->memory allocation safety stuff
 
 #include <iostream>
 #include <math.h>
