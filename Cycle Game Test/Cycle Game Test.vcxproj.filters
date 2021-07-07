@@ -7,4 +7,7 @@
     <ClInclude Include="..\ThreadPool.h" />
     <ClInclude Include="..\Profile.h" />
   </ItemGroup>
+  <ItemGroup>
+    <None Include="..\README.md" />
+  </ItemGroup>
 </Project>
