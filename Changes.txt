@@ -1,0 +1,16 @@
+As per the top instructions of ModernGameTest.cpp, I ran the following code:
+
+g++ ModernGameTest.cpp -o ModernGameTest.exe --std=c++17
+
+But, I got repeated errors such as:
+
+error: unknown type name '__int64'; did you mean '__int64_t'?
+                matrix[i][static_cast<__int64>(n) - 1] = std::stoi(number); //Visual Studio said to add that cast to avoid potential overflow
+
+AND
+
+error: no member named 'pow' in namespace 'std'; did you mean simply 'pow'?
+                        else if (i < ((unsigned)std::pow(m, n) - 1)) //if we're not at the end of the last line
+
+The 'pow' error was everywhere. I changed every instance of 'std::pow' to 'pow' and hey that fixed those errors! I also changed the __int64 to int_64_t as the error requested and all errors disappeared. Then the file ModernGameTest.cpp compiled and created ModernGameTest.exe.
+

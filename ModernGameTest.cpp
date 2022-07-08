@@ -160,7 +160,7 @@ void readinMatrix2D(std::string filepath, int n, std::vector<std::vector<int>>& 
 			matrix[i][j] = std::stoi(number);
 		}
 		std::getline(data, number, '\n');
-		matrix[i][static_cast<__int64>(n) - 1] = std::stoi(number); //Visual Studio said to add that cast to avoid potential overflow
+		matrix[i][static_cast<__int64_t>(n) - 1] = std::stoi(number); //Visual Studio said to add that cast to avoid potential overflow
 		//matrix[i][n - 1] = std::stoi(number); //original line from ^
 	}
 
@@ -824,26 +824,26 @@ void zmnAdjacencyGeneration(std::ofstream& outputfile, unsigned m, unsigned n)
 
 	unsigned placeinVector = 0;
 	std::vector<unsigned> valueholder(n);
-	std::vector<Tuple<unsigned>> directProduct((unsigned)std::pow(m, n), n);
-	std::vector<std::vector<unsigned>> matrix((unsigned)std::pow(m, n));
-	for (unsigned i = 0; i < (unsigned)std::pow(m, n); i++)
+	std::vector<Tuple<unsigned>> directProduct((unsigned)pow(m, n), n);
+	std::vector<std::vector<unsigned>> matrix((unsigned)pow(m, n));
+	for (unsigned i = 0; i < (unsigned)pow(m, n); i++)
 	{
-		matrix[i] = std::vector<unsigned>((unsigned)std::pow(m, n)); //make matrix a 2D vector
+		matrix[i] = std::vector<unsigned>((unsigned)pow(m, n)); //make matrix a 2D vector
 	}
 
 	zmnGeneration(directProduct, valueholder, 0, placeinVector, m, n); //generate all the elements of (Z_m)^n, placed into directProduct vector
 
 	std::cout << "Testing Time!" << std::endl;
-	for (unsigned i = 0; i < (unsigned)std::pow(m, n); i++)
+	for (unsigned i = 0; i < (unsigned)pow(m, n); i++)
 	{
 		directProduct[i].printTuple();
 		std::cout << std::endl;
 	}
 
 	//iterate through all combinations to figure out adjacency matrix
-	for (unsigned i = 0; i < (unsigned)std::pow(m, n); i++) //tighter bound here?
+	for (unsigned i = 0; i < (unsigned)pow(m, n); i++) //tighter bound here?
 	{
-		for (unsigned j = i; j < (unsigned)std::pow(m, n); j++)
+		for (unsigned j = i; j < (unsigned)pow(m, n); j++)
 		{
 			if (tupleDifference(directProduct[i], directProduct[j]) == 1)
 			{
@@ -858,16 +858,16 @@ void zmnAdjacencyGeneration(std::ofstream& outputfile, unsigned m, unsigned n)
 
 	outputfile << "Adjacency Matrix" << std::endl;
 	//output adjacency matrix to .txt file
-	for (unsigned i = 0; i < (unsigned)std::pow(m, n); i++)
+	for (unsigned i = 0; i < (unsigned)pow(m, n); i++)
 	{
-		for (unsigned j = 0; j < (unsigned)std::pow(m, n); j++)
+		for (unsigned j = 0; j < (unsigned)pow(m, n); j++)
 		{
 			outputfile << matrix[i][j];
-			if (j < ((unsigned)std::pow(m, n) - 1)) //if we're not at the last entry in a line
+			if (j < ((unsigned)pow(m, n) - 1)) //if we're not at the last entry in a line
 			{
 				outputfile << ',';
 			}
-			else if (i < ((unsigned)std::pow(m, n) - 1)) //if we're not at the end of the last line
+			else if (i < ((unsigned)pow(m, n) - 1)) //if we're not at the end of the last line
 			{
 				outputfile << std::endl;
 			}
@@ -1051,8 +1051,8 @@ int main()
 			}
 
 			//std::vector<unsigned> valueholder(generationselection3);
-			//std::vector<Tuple<unsigned>> directProduct((unsigned) std::pow(generationselection2, generationselection3));
-			//std::vector<Tuple<unsigned>> directProduct((unsigned)std::pow(generationselection2, generationselection3), generationselection3);
+			//std::vector<Tuple<unsigned>> directProduct((unsigned) pow(generationselection2, generationselection3));
+			//std::vector<Tuple<unsigned>> directProduct((unsigned)pow(generationselection2, generationselection3), generationselection3);
 
 			//zmnGeneration(directProduct, valueholder, 0, 0, generationselection2, generationselection3);
 			//void zmnAdjacencyGeneration(std::ofstream & outputfile, std::vector<Tuple<unsigned>>&directProduct, unsigned m, unsigned n)
@@ -1247,10 +1247,10 @@ int main()
 		}
 
 		//1-Dimensional vectors, might avoid some cache misses???
-		std::vector<int> AdjacencyMatrix1D(std::pow(numnodes, 2));
-		std::vector<int> edgeusageMatrix1D(std::pow(numnodes, 2));
+		std::vector<int> AdjacencyMatrix1D(pow(numnodes, 2));
+		std::vector<int> edgeusageMatrix1D(pow(numnodes, 2));
 
-		for (unsigned i = 0; i < std::pow(numnodes, 2); i++)
+		for (unsigned i = 0; i < pow(numnodes, 2); i++)
 		{
 			AdjacencyMatrix1D[i] = 0;
 			edgeusageMatrix1D[i] = 0;
